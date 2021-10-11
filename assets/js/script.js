@@ -32,6 +32,7 @@ var createTaskEl = function (taskDataObj) {
 // create list item
 var listItemEl = document.createElement("li");
     listItemEl.className = "task-item";
+    listItemEl.setAttribute("data-task-id", taskIdCounter);
 
 // create div to hold task info and add to list item
 var taskInfoEl = document.createElement("div");
@@ -106,6 +107,8 @@ var taskButtonHandler = function(event) {
     // delete button was clicked
     else if (targetEl.matches(".delete-btn")) {
       var taskId = targetEl.getAttribute("data-task-id");
+      console.log(taskId);
+
       deleteTask(taskId);
     }
   };
