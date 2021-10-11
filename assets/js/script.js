@@ -90,27 +90,30 @@ var statusOptionEl = document.createElement("option");
     }
 
 return actionContainerEl;
-};
-
+}
 
 formEl.addEventListener("submit", taskFormHandler);
 
 var taskButtonHandler = function(event) {
-    console.log(event.target);
-
-    if (event.target.matches(".delete-btn")) {
-        // get the element's task id
-        var taskId = event.target.getAttribute("data-task-id");
-        console.log(taskId);
+    // get target element from event
+    var targetEl = event.target;
+  
+    // edit button was clicked
+    if (targetEl.matches(".edit-btn")) {
+      var taskId = targetEl.getAttribute("data-task-id");
+      editTask(taskId);
+    } 
+    // delete button was clicked
+    else if (targetEl.matches(".delete-btn")) {
+      var taskId = targetEl.getAttribute("data-task-id");
+      deleteTask(taskId);
     }
-};
+  };
 
-var deleteTask = function(taskId) {
-  console.log(taskId);
-  // find task list element with taskId value and remove it
-  var taskSelected = document.querySelector(".task-item[data-task-id='" + taskId + "']");
-  taskSelected.remove();
-};
+  var deleteTask = function(taskId) {
+    var taskSelected = document.querySelector(".task-item[data-task-id='" + taskId + "']");
+    taskSelected.remove();
+  };
 
 // for edit and delete buttons
 pageContentEl.addEventListener("click", taskButtonHandler);
